@@ -65,7 +65,7 @@ class Item
     protected function setAbility($ability)
     {
         if (!is_numeric($ability)) {
-            throw new \InvalidArgumentException('Ability has to be numeric');
+            throw new \InvalidArgumentException('Expected ability to be numeric');
         }
 
         $this->ability = $ability;
@@ -79,7 +79,7 @@ class Item
     protected function setCompared($compared)
     {
         if (!is_array($compared)) {
-            throw new \InvalidArgumentException('Compared has to be an array');
+            throw new \InvalidArgumentException('Expected compared to be an array');
         }
 
         $this->compared = $compared;
@@ -96,6 +96,6 @@ class Item
             throw new \InvalidArgumentException('Id cannot be empty');
         }
 
-        $this->id = $id;
+        $this->id = (string) $id;
     }
 }
