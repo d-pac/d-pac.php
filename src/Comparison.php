@@ -24,6 +24,36 @@ class Comparison
     }
 
     /**
+     * Get the id of the A item
+     *
+     * @return mixed
+     */
+    public function getA()
+    {
+        return $this->a;
+    }
+
+    /**
+     * Get the id of the B item
+     *
+     * @return mixed
+     */
+    public function getB()
+    {
+        return $this->b;
+    }
+
+    /**
+     * Get an array of both ids
+     *
+     * @return array
+     */
+    public function getIds()
+    {
+        return ['a' => $this->a, 'b' => $this->b];
+    }
+
+    /**
      * Validate and set the item ids
      *
      * @param string $a
