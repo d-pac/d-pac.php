@@ -1,8 +1,14 @@
 <?php
 namespace Dpac\Dpac;
 
-class Util {
-
+/**
+ * Class Util
+ *
+ * @author William Blommaert <william@lunargravity.be>
+ * @author Camille Reynders <camille.reynders@imec.be>
+ */
+class Util
+{
     /**
      * Compare given arrays by their amount of comparisons
      *
@@ -12,7 +18,7 @@ class Util {
      */
     public static function compareByLength(array $a, array $b)
     {
-        if(!is_array($a) || !is_array($b)) {
+        if (!is_array($a) || !is_array($b)) {
             throw new \InvalidArgumentException('Expected both parameters $a and $b to be of type array');
         }
 
@@ -28,7 +34,7 @@ class Util {
      */
     public static function compareByAbility(array $a, array $b)
     {
-        if(!is_array($a) || !is_array($b)) {
+        if (!is_array($a) || !is_array($b)) {
             throw new \InvalidArgumentException('Expected both parameters $a and $b to be of type array');
         }
 
