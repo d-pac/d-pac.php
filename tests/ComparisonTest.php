@@ -8,6 +8,11 @@ namespace Dpac\Dpac;
  */
 class ComparisonTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * We can create a new Comparison
+     *
+     * @group success
+     */
     public function testCanBeCreated()
     {
         $comparison = new Comparison('2', '3');
