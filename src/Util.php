@@ -10,6 +10,22 @@ namespace Dpac\Dpac;
 class Util
 {
     /**
+     * Compare given Item objects by their ability
+     *
+     * @param Item $a
+     * @param Item $b
+     * @return mixed
+     */
+    public static function compareByAbility(Item $a, Item $b)
+    {
+        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
+            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
+        }
+
+        return $a->getAbility() - $b->getAbility();
+    }
+
+    /**
      * Compare given Item objects by the amount of comparisons they contain
      *
      * @param Item $a
@@ -26,19 +42,21 @@ class Util
     }
 
     /**
-     * Compare given Item objects by their ability
+     * Get the index for the given id in a collection of Items
      *
-     * @param Item $a
-     * @param Item $b
-     * @return mixed
+     * @param string $id
+     * @param Item[] $items
+     * @return int|bool $index
      */
-    public static function compareByAbility(Item $a, Item $b)
+    public static function findIndex($id, $items)
     {
-        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
-            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
+        foreach ($items as $index => $item) {
+            if ($item->getId() === (string) $id) {
+                return $index;
+            }
         }
 
-        return $a->getAbility() - $b->getAbility();
+        return false;
     }
 
     /**
