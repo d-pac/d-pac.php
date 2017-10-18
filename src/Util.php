@@ -40,4 +40,34 @@ class Util
 
         return $a->getAbility() - $b->getAbility();
     }
+
+    /**
+     * Get the amount of comparisons for a given collection of ids
+     *
+     * @param array $compared
+     * @param string $id
+     * @return int $counter
+     */
+    public static function getNumberOfComparisons($compared, $id)
+    {
+        $counter = 0;
+
+        // Validate our parameters
+        if (!is_array($compared)) {
+            throw new \InvalidArgumentException('Expected compared to be an array');
+        }
+
+        if (empty($id)) {
+            throw new \InvalidArgumentException('Id cannot be empty');
+        }
+
+        // Loop over each id and compare with the referenced id
+        foreach ($compared as $comparedId) {
+            if ((string) $id === (string) $comparedId) {
+                $counter++;
+            }
+        }
+
+        return $counter;
+    }
 }
