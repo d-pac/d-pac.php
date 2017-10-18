@@ -10,34 +10,34 @@ namespace Dpac\Dpac;
 class Util
 {
     /**
-     * Compare given arrays by their amount of comparisons
+     * Compare given Item objects by the amount of comparisons they contain
      *
-     * @param array $a
-     * @param array $b
+     * @param Item $a
+     * @param Item $b
      * @return int
      */
-    public static function compareByLength(array $a, array $b)
+    public static function compareByLength(Item $a, Item $b)
     {
-        if (!is_array($a) || !is_array($b)) {
-            throw new \InvalidArgumentException('Expected both parameters $a and $b to be of type array');
+        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
+            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
         }
 
-        return count($a['compared']) - count($b['compared']);
+        return count($a->getCompared()) - count($b->getCompared());
     }
 
     /**
-     * Compare given arrays by their ability
+     * Compare given Item objects by their ability
      *
-     * @param array $a
-     * @param array $b
+     * @param Item $a
+     * @param Item $b
      * @return mixed
      */
-    public static function compareByAbility(array $a, array $b)
+    public static function compareByAbility(Item $a, Item $b)
     {
-        if (!is_array($a) || !is_array($b)) {
-            throw new \InvalidArgumentException('Expected both parameters $a and $b to be of type array');
+        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
+            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
         }
 
-        return $a['ability'] - $b['ability'];
+        return $a->getAbility() - $b->getAbility();
     }
 }
