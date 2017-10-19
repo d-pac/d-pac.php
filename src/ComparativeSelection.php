@@ -2,6 +2,7 @@
 namespace Dpac\Dpac;
 
 use Dpac\Dpac\Exception\SelectionException;
+use Dpac\Dpac\Util as Util;
 
 /**
  * Comparative Selection
@@ -31,8 +32,8 @@ class ComparativeSelection
 
         shuffle($sortedByCompared);
 
-        usort($sortedByCompared, 'Util::compareByLength');
-        usort($sortedByAbility, 'Util::compareByAbility');
+        usort($sortedByCompared, ['Dpac\Dpac\Util', 'compareByLength']);
+        usort($sortedByAbility, ['Dpac\Dpac\Util','compareByAbility']);
 
         $selected = array_shift($sortedByCompared);
 
