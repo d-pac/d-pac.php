@@ -11,6 +11,7 @@ class Comparison
 {
     private $a;
     private $b;
+    private $selected;
 
     /**
      * Constructor.
@@ -21,6 +22,7 @@ class Comparison
     public function __construct($a, $b)
     {
         $this->setIds($a, $b);
+        $this->selected = '';
     }
 
     /**
@@ -54,6 +56,16 @@ class Comparison
     }
 
     /**
+     * Get the selected id
+     *
+     * @return string
+     */
+    public function getSelected()
+    {
+        return $this->selected;
+    }
+
+    /**
      * Validate and set the item ids
      *
      * @param string $a
@@ -67,5 +79,19 @@ class Comparison
 
         $this->a = (string) $a;
         $this->b = (string) $b;
+    }
+
+    /**
+     * Set the selected id
+     *
+     * @param $id
+     */
+    public function setSelected($id)
+    {
+        if (empty($id)) {
+            throw new \InvalidArgumentException('Id cannot be empty');
+        }
+
+        $this->selected = $id;
     }
 }
