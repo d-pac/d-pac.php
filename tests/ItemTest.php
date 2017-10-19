@@ -12,6 +12,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
      * We can create a new Item
      *
      * @group success
+     * @group item
      */
     public function testCanBeCreated()
     {

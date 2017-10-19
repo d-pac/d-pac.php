@@ -12,6 +12,7 @@ class ComparisonTest extends \PHPUnit_Framework_TestCase
      * We can create a new Comparison
      *
      * @group success
+     * @group comparison
      */
     public function testCanBeCreated()
     {
@@ -26,6 +27,7 @@ class ComparisonTest extends \PHPUnit_Framework_TestCase
      * We can't leave out one of the parameters
      *
      * @group failure
+     * @group comparison
      */
     public function testThrowsInvalidArgumentException()
     {
@@ -40,6 +42,7 @@ class ComparisonTest extends \PHPUnit_Framework_TestCase
      * We can set the ids
      *
      * @group success
+     * @group comparison
      */
     public function testCanSetIds()
     {
