@@ -1,6 +1,8 @@
 <?php
 namespace Dpac\Dpac;
 
+use Dpac\Dpac\Exception\ComparisonException;
+
 /**
  * Class Util
  *
@@ -12,6 +14,9 @@ class Util
     /**
      * Compare given Item objects by their ability
      *
+     * @throws \InvalidArgumentException
+     * @throws ComparisonException
+     *
      * @param Item $a
      * @param Item $b
      * @return mixed
@@ -22,7 +27,11 @@ class Util
             throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
         }
 
-        return $a->getAbility() - $b->getAbility();
+        if (!is_float($a->getAbility()) || !is_float($b->getAbility())) {
+            throw new ComparisonException('Expected both ability values to be of type float');
+        }
+
+        return (float) $a->getAbility() - (float) $b->getAbility();
     }
 
     /**

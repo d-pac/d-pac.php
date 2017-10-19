@@ -17,7 +17,7 @@ class Item
      * Constructor
      *
      * @param string $id
-     * @param int $ability
+     * @param float $ability
      * @param array $compared
      */
     public function __construct($id, $ability, $compared)
@@ -30,11 +30,11 @@ class Item
     /**
      * Get the ability
      *
-     * @return int
+     * @return float
      */
     public function getAbility()
     {
-        return (int) $this->ability;
+        return (float) $this->ability;
     }
 
     /**
@@ -60,15 +60,15 @@ class Item
     /**
      * Validate and set the ability
      *
-     * @param int $ability
+     * @param float $ability
      */
     protected function setAbility($ability)
     {
-        if (!is_numeric($ability)) {
-            throw new \InvalidArgumentException('Expected ability to be numeric');
+        if (!is_float($ability)) {
+            throw new \InvalidArgumentException('Expected ability to be a float value');
         }
 
-        $this->ability = $ability;
+        $this->ability = (float) $ability;
     }
 
     /**
