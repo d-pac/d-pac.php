@@ -1,0 +1,64 @@
+[{
+        "assessment": "Tech scouting",
+        "id": "R10",
+        "owner": [],
+        "ability": -0.5097987351109451,
+        "se": 0.2811070921381494,
+        "rankType": "to rank",
+        "compared": []
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R12",
+        "owner": [],
+        "ability": -0.29835368552451114,
+        "se": 0.28297282557132836,
+        "rankType": "to rank",
+        "compared": ["R10", "R10", "R10"]
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R13",
+        "owner": [],
+        "ability": -0.5359770282989293,
+        "se": 0.28607634232291806,
+        "rankType": "to rank",
+        "compared": ["R10", "R10", "R10"]
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R15",
+        "owner": [],
+        "ability": -0.7851251432798293,
+        "se": 0.3003187379311434,
+        "rankType": "to rank",
+        "compared": ["R10", "R10", "R10"]
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R14",
+        "owner": [],
+        "ability": -0.9163869142800254,
+        "se": 0.3052521683074598,
+        "rankType": "to rank",
+        "compared": ["R10", "R10", "R10"]
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R16",
+        "owner": [],
+        "ability": -0.18984320069524502,
+        "se": 0.28403367495904974,
+        "rankType": "to rank",
+        "compared": ["R10", "R10", "R10"]
+    },
+    {
+        "assessment": "Tech scouting",
+        "id": "R11",
+        "owner": [],
+        "ability": 0.7330627480537977,
+        "se": 0.2950555743175155,
+        "rankType": "to rank",
+        "compared": ["R10", "R10"]
+    }
+]

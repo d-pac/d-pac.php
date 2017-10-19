@@ -1,0 +1,37 @@
+[{
+        "assessment": "Demo 3",
+        "id": "3",
+        "owner": [],
+        "ability": -0.7330627480537977,
+        "se": 0.2811070921381494,
+        "rankType": "to rank",
+        "compared": ["2", "4"]
+    },
+    {
+        "assessment": "Demo 2",
+        "id": "3",
+        "owner": [],
+        "ability": 0.7330627480537977,
+        "se": 0.1811073021381494,
+        "rankType": "to rank",
+        "compared": ["3"]
+    },
+    {
+        "assessment": "Demo 1",
+        "id": "1",
+        "owner": [],
+        "ability": -0.9163869142800254,
+        "se": 0.1811073021381494,
+        "rankType": "to rank",
+        "compared": []
+    },
+    {
+        "assessment": "Demo 4",
+        "id": "4",
+        "owner": [],
+        "ability": -0.5097987351109451,
+        "se": 0.1811073021381494,
+        "rankType": "to rank",
+        "compared": ["3", "5", "6"]
+    }
+]
