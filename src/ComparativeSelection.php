@@ -1,7 +1,7 @@
 <?php
 namespace Dpac\Dpac;
 
-use Dpac\Dpac\Exception\SelectionException;
+use Dpac\Dpac\Exception\SelectionException as SelectionException;
 use Dpac\Dpac\Util as Util;
 
 /**
@@ -39,7 +39,7 @@ class ComparativeSelection
 
         $position = Util::findIndex($selected->getId(), $sortedByAbility);
 
-        if (!$position) {
+        if ($position === false) {
             throw new SelectionException("Invalid position for selected Item with id {$selected->getId()}");
         }
 
