@@ -1,5 +1,5 @@
 <?php
-namespace Dpac\Dpac;
+namespace Dpac\Dpac\Functions;
 
 /**
  * Stat class containing various statistical functions
