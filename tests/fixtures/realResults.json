@@ -1,0 +1,289 @@
+[
+    {
+        "_id": "Songtekst 24",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.2834,
+            "se": 0.4204
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 22",
+        "rankType": "to rank",
+        "ability": {
+            "value": -1.2541,
+            "se": 0.4826
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 14",
+        "rankType": "to rank",
+        "ability": {
+            "value": -1.0609,
+            "se": 0.4604
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 23",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.0863,
+            "se": 0.4074
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 9",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.0123,
+            "se": 0.4136
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 11",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.5131,
+            "se": 0.4206
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 7",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.7069,
+            "se": 0.4274
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 1",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.7359,
+            "se": 0.4265
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 13",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.1056,
+            "se": 0.4076
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 2",
+        "rankType": "to rank",
+        "ability": {
+            "value": -1.2568,
+            "se": 0.4824
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 6",
+        "rankType": "to rank",
+        "ability": {
+            "value": 1.5055,
+            "se": 0.5085
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 5",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.6364,
+            "se": 0.4356
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 20",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.4176,
+            "se": 0.4113
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 12",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.4322,
+            "se": 0.4132
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 18",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.2285,
+            "se": 0.4073
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 3",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.8819,
+            "se": 0.4399
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 17",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.3705,
+            "se": 0.4138
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 8",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.2064,
+            "se": 0.4088
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 16",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.0946,
+            "se": 0.4063
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 21",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.2232,
+            "se": 0.4076
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 15",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.1946,
+            "se": 0.4105
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 10",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.1118,
+            "se": 0.4062
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 19",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.919,
+            "se": 0.4421
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 4",
+        "rankType": "to rank",
+        "ability": {
+            "value": 0.2407,
+            "se": 0.4075
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 26",
+        "rankType": "to rank",
+        "ability": {
+            "value": -0.7794,
+            "se": 0.4283
+        },
+        "compared": {
+
+        }
+    },
+    {
+        "_id": "Songtekst 25",
+        "rankType": "to rank",
+        "ability": {
+            "value": 1.088,
+            "se": 0.4568
+        },
+        "compared": {
+
+        }
+    }
+]
+
