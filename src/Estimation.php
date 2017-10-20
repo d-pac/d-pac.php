@@ -1,8 +1,6 @@
 <?php
 namespace Dpac\Dpac;
 
-use Dpac\Dpac\ValueObject as ValueObject;
-
 /**
  * Estimation Class
  *
@@ -12,33 +10,33 @@ use Dpac\Dpac\ValueObject as ValueObject;
 class Estimation
 {
     /**
-     * Retrieve a ValueObject from the lookup service, or create one and store it
+     * Retrieve a valueObject array from the lookup array, or create one and store it in the lookup array
      *
-     * @param $lookup
-     * @param $id
-     * @return ValueObject
+     * @param array $lookup an array containing sub-arrays, passed by reference
+     * @param string $id
+     * @return array $valueObject
      */
-    public function getOrCreate($lookup, $id)
+    public static function getOrCreate(&$lookup, $id)
     {
-        $obj = $lookup['objectsById'][$id];
+        $valueObject = $lookup['objectsById'][$id];
 
-        if ($obj) {
-            return $obj;
+        if ($valueObject) {
+            return $valueObject;
         }
 
         $item = $lookup['itemsById'][$id];
 
-        $obj = new ValueObject();
+        $valueObject = [
+            'id' => $item['id'],
+            'selected' => 0,
+            'compared' => 0,
+            'ability' => $item['ability'],
+            'se' => $item['se'],
+            'ranked' => $item['ranked'],
+        ];
 
-        $obj->setSelected(0);
-        $obj->setCompared(0);
-        $obj->setAbility($item->getAbility());
-        $obj->setStandardDeviation($item->getStandardDeviation());
-        $obj->setRanked($item->getRanked());
-        $obj->setId($item->getId());
+        $lookup['objectsById'][$id] = $valueObject;
 
-        $lookup['objectsById'][$id] = $obj;
-
-        return $obj;
+        return $valueObject;
     }
 }
