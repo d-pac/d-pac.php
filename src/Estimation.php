@@ -88,7 +88,7 @@ class Estimation
         $ids = array_keys($lookup['unrankedById']);
 
         foreach ($ids as $id) {
-            $current = $lookup['objById'][$id];
+            $current = &$lookup['objectsById'][$id];
             $prev = $previousUnranked[$id];
 
             $expected = array_reduce(
@@ -101,7 +101,7 @@ class Estimation
                     });
 
                     if ($comparison['selected'] && count($filteredIds) === 1) {
-                        $opponent = $previousUnranked[$filteredIds[0]] || $lookup['objById'][$filteredIds[0]];
+                        $opponent = $previousUnranked[$filteredIds[0]] || $lookup['objectsById'][$filteredIds[0]];
                         $memo['value'] += Pm::rasch($prev['ability'], $opponent['ability']);
                         $memo['info'] += Pm::fisher($prev['ability'], $opponent['ability']);
                     }
