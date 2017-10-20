@@ -19,7 +19,7 @@ class Estimation
      * @param string $id
      * @return array $valueObject
      */
-    public static function getOrCreate(&$lookup, $id)
+    protected static function getOrCreate(&$lookup, $id)
     {
         $valueObject = $lookup['objectsById'][$id];
 
@@ -52,7 +52,7 @@ class Estimation
      * @param $lookup
      * @param $id
      */
-    public static function prepValuesOnFirstComparison(&$lookup, $id)
+    protected static function prepValuesOnFirstComparison(&$lookup, $id)
     {
         $object = self::getOrCreate($lookup, $id);
 
@@ -77,7 +77,7 @@ class Estimation
      * @param $comparisons
      * @param $iteration
      */
-    public static function CML(&$lookup, $comparisons, $iteration)
+    protected static function CML(&$lookup, $comparisons, $iteration)
     {
         if (empty($lookup['unrankedById'])) {
             throw new \InvalidArgumentException('Expected lookup to contain sub-array unrankedById');
@@ -121,5 +121,55 @@ class Estimation
                 $current['se'] = Util::clamp(1 / sqrt($expected['info']), -200, 200);
             }
         }
+    }
+
+    /**
+     * Estimates the items featured in comparisons
+     *
+     * @param array $payload an array containing items and comparisons in separate sub-arrays
+     * @return array|mixed
+     */
+    public static function estimate($payload)
+    {
+        $items = $payload['items'];
+        $comparisons = $payload['comparisons'];
+        $lookup = [
+            'itemsById' => [],
+            'objectsById' => [],
+            'unrankedById' => []
+        ];
+
+        if (is_array($items)) {
+            foreach ($items as $item) {
+                $lookup['itemsById'][$item['id']] = $item;
+            }
+        } else {
+            $lookup['itemsById'] = $items;
+        }
+
+        foreach ($comparisons as $comparison) {
+            if ($comparison['selected']) {
+                $valueObject = &self::getOrCreate($lookup, $comparison['selected']);
+                $valueObject['selectedNum']++;
+
+                self::prepValuesOnFirstComparison($lookup, $comparison['a']);
+                self::prepValuesOnFirstComparison($lookup, $comparison['b']);
+            }
+        }
+
+        $ids = array_keys($lookup['unrankedById']);
+
+        foreach ($ids as $id) {
+            $object = &$lookup['unrankedById'][$id];
+            $interm = $object['comparedNum'] - 2 * 0.003;
+            $interm = $interm * $object['selectedNum'] / $object['comparedNum'];
+            $object['selectedNum'] = 0.003 + $interm;
+        }
+
+        for ($i = 4; $i >= 0; $i--) {
+            self::CML($lookup, $comparisons, $i);
+        }
+
+        return (is_array($items)) ? array_values($lookup['unrankedById']) : $lookup['unrankedById'];
     }
 }
