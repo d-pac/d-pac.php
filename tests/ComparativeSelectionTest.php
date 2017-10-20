@@ -21,49 +21,18 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
         $this->times = 2000;
 
         // Collection of Item objects with acceptable values
-        $itemsJson = json_decode(file_get_contents(__DIR__ . '/fixtures/items.json'), true);
-
-        foreach ($itemsJson as $item) {
-            $this->items[] = new Item(
-                (string) $item['id'],
-                (float) $item['ability'],
-                $item['compared'],
-                false,
-                (float) $item['se']
-            );
-        }
+        $this->items = json_decode(file_get_contents(__DIR__ . '/fixtures/items.json'), true);
 
         // Collection of Item objects with empty compared array
-        $noneComparedJson = json_decode(file_get_contents(__DIR__ . '/fixtures/noneCompared.json'), true);
-
-        foreach ($noneComparedJson as $item) {
-            $this->noneCompared[] = new Item(
-                (string) $item['id'],
-                (float) $item['ability'],
-                $item['compared'],
-                false,
-                (float) $item['se']
-            );
-        }
+        $this->noneCompared = json_decode(file_get_contents(__DIR__ . '/fixtures/noneCompared.json'), true);
 
         // Collection of Item objects with one object being least compared
-        $leastComparedJson = json_decode(file_get_contents(__DIR__ . '/fixtures/leastCompared.json'), true);
-
-        foreach ($leastComparedJson as $item) {
-            $this->leastCompared[] = new Item(
-                (string) $item['id'],
-                (float) $item['ability'],
-                $item['compared'],
-                false,
-                (float) $item['se']
-            );
-        }
+        $this->leastCompared = json_decode(file_get_contents(__DIR__ . '/fixtures/leastCompared.json'), true);
     }
 
     /**
      * @group success
      * @group selection
-     * @group skip
      */
     public function testCanSelect()
     {
@@ -73,9 +42,8 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
 
         $result = ComparativeSelection::select($this->items);
 
-        $this->assertInstanceOf(Comparison::class, $result);
-        $this->assertNotEmpty($result->getA());
-        $this->assertNotEmpty($result->getB());
+        $this->assertNotEmpty($result['a']);
+        $this->assertNotEmpty($result['b']);
 
         unset($this->items, $result);
     }
@@ -88,7 +56,7 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $items = '';
+        $items = [];
 
         ComparativeSelection::select($items);
 
@@ -112,10 +80,9 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < $this->times; $i++) {
             $selected = ComparativeSelection::select($this->noneCompared);
-            $this->assertInstanceOf(Comparison::class, $selected);
 
-            $aIndex = Util::findIndex($selected->getA(), $this->noneCompared);
-            $bIndex = Util::findIndex($selected->getB(), $this->noneCompared);
+            $aIndex = Util::findIndex($selected['a'], $this->noneCompared);
+            $bIndex = Util::findIndex($selected['b'], $this->noneCompared);
 
             if ($aIndex > $N2) {
                 $this->assertLessThanOrEqual($N2, $bIndex);
@@ -130,7 +97,7 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
      *
      * @group success
      * @group selection
-     * @group individual
+     * @group testme
      */
     public function testGivePreferenceToLeastComparedWith()
     {
@@ -140,10 +107,9 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < $this->times; $i++) {
             $selected = ComparativeSelection::select($this->leastCompared);
-            $this->assertInstanceOf(Comparison::class, $selected);
 
-            $this->assertEquals($selected->getA(), "R10");
-            $this->assertEquals($selected->getB(), "R11");
+            $this->assertEquals($selected['a'], "R10");
+            $this->assertEquals($selected['b'], "R11");
         }
     }
 }
