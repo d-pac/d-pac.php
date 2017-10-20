@@ -13,12 +13,12 @@ use Dpac\Dpac\Util as Util;
 class ComparativeSelection
 {
     /**
-     * @param Item[] $items
+     * @param array $items
      *
      * @throws \InvalidArgumentException
      * @throws SelectionException
      *
-     * @return Comparison $comparison
+     * @return array $comparison
      */
     public static function select($items)
     {
@@ -37,10 +37,10 @@ class ComparativeSelection
 
         $selected = array_shift($sortedByCompared);
 
-        $position = Util::findIndex($selected->getId(), $sortedByAbility);
+        $position = Util::findIndex($selected['id'], $sortedByAbility);
 
         if ($position === false) {
-            throw new SelectionException("Invalid position for selected Item with id {$selected->getId()}");
+            throw new SelectionException("Invalid position for selected Item with id {$selected['id']}");
         }
 
         $N2 = count($sortedByAbility) / 2;
@@ -61,20 +61,21 @@ class ComparativeSelection
         // We use an anonymous custom sorting function because we need the external $selected->getId() value
         usort($sliced, function ($a, $b) use ($selected) {
 
-            if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
-                throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
+            if (!is_array($a) || !is_array($b)) {
+                throw new \InvalidArgumentException('Expected both parameters $a and $b to be arrays');
             }
 
-            $aN = Util::getNumberOfComparisons($a->getCompared(), $selected->getId());
-            $bN = Util::getNumberOfComparisons($b->getCompared(), $selected->getId());
+            $aN = Util::getNumberOfComparisons($a['compared'], $selected['id']);
+            $bN = Util::getNumberOfComparisons($b['compared'], $selected['id']);
 
             return $aN - $bN;
         });
 
         $opponent = array_shift($sliced);
 
-        $comparison = new Comparison($selected->getId(), $opponent->getId());
-
-        return $comparison;
+        return [
+            'a' => $selected['id'],
+            'b' => $opponent['id']
+        ];
     }
 }
