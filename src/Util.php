@@ -97,4 +97,17 @@ class Util
 
         return $counter;
     }
+
+    /**
+     * Clamps a given value within the inclusive lower and upper bounds
+     *
+     * @param $number
+     * @param $minValue
+     * @param $maxValue
+     * @return mixed
+     */
+    public static function clamp($number, $minValue, $maxValue)
+    {
+        return max($minValue, min($maxValue, $number));
+    }
 }
