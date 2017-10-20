@@ -61,7 +61,7 @@ class Pm
      * @param $digits
      * @return float|int
      */
-    public static function fisher($a, $b, $digits)
+    public static function fisher($a, $b, $digits = null)
     {
         $r = self::rasch($a, $b);
         $info = $r * (1 - $r);
