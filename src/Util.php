@@ -12,55 +12,55 @@ use Dpac\Dpac\Exception\ComparisonException;
 class Util
 {
     /**
-     * Compare given Item objects by their ability
+     * Compare given item arrays by their ability
      *
      * @throws \InvalidArgumentException
      * @throws ComparisonException
      *
-     * @param Item $a
-     * @param Item $b
+     * @param array $a
+     * @param array $b
      * @return mixed
      */
-    public static function compareByAbility(Item $a, Item $b)
+    public static function compareByAbility($a, $b)
     {
-        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
-            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
+        if (!is_array($a) || !is_array($b)) {
+            throw new \InvalidArgumentException('Expected both parameters $a and $b to be arrays');
         }
 
-        if (!is_float($a->getAbility()) || !is_float($b->getAbility())) {
+        if (!is_float($a['ability']) || !is_float($b['ability'])) {
             throw new ComparisonException('Expected both ability values to be of type float');
         }
 
-        return (float) $a->getAbility() - (float) $b->getAbility();
+        return (float) $a['ability'] - (float) $b['ability'];
     }
 
     /**
-     * Compare given Item objects by the amount of comparisons they contain
+     * Compare given item arrays by the amount of comparisons they contain
      *
-     * @param Item $a
-     * @param Item $b
+     * @param array $a
+     * @param array $b
      * @return int
      */
-    public static function compareByLength(Item $a, Item $b)
+    public static function compareByLength($a, $b)
     {
-        if (!is_a($a, Item::class) || !is_a($b, Item::class)) {
-            throw new \InvalidArgumentException('Expected both parameters $a and $b to be instances of Item');
+        if (!is_array($a) || !is_array($b)) {
+            throw new \InvalidArgumentException('Expected both parameters $a and $b to be arrays');
         }
 
-        return count($a->getCompared()) - count($b->getCompared());
+        return count($a['compared']) - count($b['compared']);
     }
 
     /**
-     * Get the index for the given id in a collection of Items
+     * Get the index for the given id in an items array
      *
      * @param string $id
-     * @param Item[] $items
+     * @param array $items
      * @return int|bool $index
      */
     public static function findIndex($id, $items)
     {
         foreach ($items as $index => $item) {
-            if ($item->getId() === (string) $id) {
+            if ($item['id'] === (string) $id) {
                 return $index;
             }
         }
