@@ -16,7 +16,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $item = new Item('2', 0.7330627480537977, ['3', '5', '12']);
+        $item = new Item('2', 0.7330627480537977, ['3', '5', '12'], true, 0.32032302023239);
 
         $this->assertInstanceOf(Item::class, $item);
 

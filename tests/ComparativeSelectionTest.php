@@ -24,21 +24,39 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
         $itemsJson = json_decode(file_get_contents(__DIR__ . '/fixtures/items.json'), true);
 
         foreach ($itemsJson as $item) {
-            $this->items[] = new Item((string) $item['id'], (float) $item['ability'], $item['compared']);
+            $this->items[] = new Item(
+                (string) $item['id'],
+                (float) $item['ability'],
+                $item['compared'],
+                false,
+                (float) $item['se']
+            );
         }
 
         // Collection of Item objects with empty compared array
         $noneComparedJson = json_decode(file_get_contents(__DIR__ . '/fixtures/noneCompared.json'), true);
 
         foreach ($noneComparedJson as $item) {
-            $this->noneCompared[] = new Item((string) $item['id'], (float) $item['ability'], $item['compared']);
+            $this->noneCompared[] = new Item(
+                (string) $item['id'],
+                (float) $item['ability'],
+                $item['compared'],
+                false,
+                (float) $item['se']
+            );
         }
 
         // Collection of Item objects with one object being least compared
         $leastComparedJson = json_decode(file_get_contents(__DIR__ . '/fixtures/leastCompared.json'), true);
 
         foreach ($leastComparedJson as $item) {
-            $this->leastCompared[] = new Item((string) $item['id'], (float) $item['ability'], $item['compared']);
+            $this->leastCompared[] = new Item(
+                (string) $item['id'],
+                (float) $item['ability'],
+                $item['compared'],
+                false,
+                (float) $item['se']
+            );
         }
     }
 
