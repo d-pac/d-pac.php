@@ -49,8 +49,9 @@ class Pm
     public static function rasch($a, $b)
     {
         $expDiff = exp($a - $b);
+        $result = $expDiff / (1 + $expDiff);
 
-        return $expDiff / (1 + $expDiff);
+        return $result;
     }
 
     /**
@@ -59,7 +60,7 @@ class Pm
      * @param $a
      * @param $b
      * @param $digits
-     * @return float|int
+     * @return float
      */
     public static function fisher($a, $b, $digits = null)
     {
@@ -70,6 +71,6 @@ class Pm
             return round($info, $digits);
         }
 
-        return $info;
+        return (float) $info;
     }
 }
