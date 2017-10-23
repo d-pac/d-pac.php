@@ -165,6 +165,6 @@ class Estimation
             self::CML($lookup, $comparisons, $i);
         }
 
-        return (is_array($items)) ? array_values($lookup['unrankedById']) : $lookup['unrankedById'];
+        return $lookup['unrankedById'];
     }
 }
