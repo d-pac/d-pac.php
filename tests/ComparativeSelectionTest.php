@@ -97,7 +97,6 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
      *
      * @group success
      * @group selection
-     * @group testme
      */
     public function testGivePreferenceToLeastComparedWith()
     {
