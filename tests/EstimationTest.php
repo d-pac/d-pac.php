@@ -134,14 +134,14 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
         });
 
         $expected = $this->convertRepresentations($expected);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->mixedRankRepresentations);
         $comparisons = $this->convertComparisons($this->mixedRankComparisons);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -160,7 +160,7 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
         });
 
         $expected = $this->convertRepresentations($expected);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->mixedRankRepresentations);
         $comparisons = $this->convertComparisons($this->mixedRankComparisons);
@@ -170,7 +170,7 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -185,14 +185,14 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testAllRankEqualsRGeneratedResultsIfAllProvided()
     {
         $expected = $this->convertRepresentations($this->noRankedResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->noRankedRepresentations);
         $comparisons = $this->convertComparisons($this->noRankedComparisons);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -207,17 +207,17 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testAllRankEqualsRGeneratedResultsFirstBasedPartOfData()
     {
         $expected = $this->convertRepresentations($this->noRankedResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->noRankedRepresentations);
         $comparisons = $this->convertComparisons($this->noRankedComparisons);
 
         $firstComparisons = array_rand($comparisons, count($comparisons) / 2);
-        Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
+        Estimation::estimate(['comparisons' => $firstComparisons, 'items' => $representations]);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -231,14 +231,14 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testRealDataEqualsRGeneratedResults()
     {
         $expected = $this->convertRepresentations($this->realResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->realRepresentations);
         $comparisons = $this->convertComparisons($this->realComparisons);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -252,14 +252,14 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testNulledAbilitiesEqualsRGeneratedResults()
     {
         $expected = $this->convertRepresentations($this->noRankedResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->nulledAbilityRepresentations);
         $comparisons = $this->convertComparisons($this->noRankedComparisons);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -273,14 +273,14 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testUncomparedRepresentationsShouldIgnoreThem()
     {
         $expected = $this->convertRepresentations($this->noRankedResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->uncomparedRepresentations);
         $comparisons = $this->convertComparisons($this->noRankedComparisons);
 
         $actual = Estimation::estimate(['comparisons' => $comparisons, 'items' => $representations]);
         $actual = array_map([$this, 'prepResult'], $actual);
-        $actual = array_reduce($actual, [$this, 'maptoLookupHash'], []);
+        $actual = array_reduce($actual, [$this, 'mapToLookupHash'], []);
 
         $this->assertEquals($expected, $actual);
     }
@@ -294,10 +294,10 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
     public function testMapOfItemsShouldBeAcceptedAndOutputSameType()
     {
         $expected = $this->convertRepresentations($this->noRankedResults);
-        $expected = array_reduce($expected, [$this, 'maptoLookupHash'], []);
+        $expected = array_reduce($expected, [$this, 'mapToLookupHash'], []);
 
         $representations = $this->convertRepresentations($this->uncomparedRepresentations);
-        $representations = array_reduce($representations, [$this, 'maptoLookupHash'], []);
+        $representations = array_reduce($representations, [$this, 'mapToLookupHash'], []);
 
         $comparisons = $this->convertComparisons($this->noRankedComparisons);
 
