@@ -3,7 +3,7 @@ namespace Dpac\Dpac;
 
 use Dpac\Dpac\Exceptions\NotANumberError;
 use Dpac\Dpac\Functions\Pm;
-use PHPUnit_FrameWork_Constraint_IsType as PHPUnit_IsType;
+use PHPUnit_Framework_Constraint_IsType;
 
 /**
  * Pm Test Class
@@ -100,7 +100,7 @@ class PmTest extends \PHPUnit_Framework_TestCase
         $fixture = $this->fisherFixtures['fixed'];
         $actual = Pm::fisher($fixture['a'], $fixture['b'], $fixture['digits']);
 
-        $this->assertInternalType(PHPUnit_IsType::TYPE_FLOAT, $actual);
+        $this->assertInternalType(PHPUnit_Framework_Constraint_IsType::TYPE_FLOAT, $actual);
     }
 
     /**
