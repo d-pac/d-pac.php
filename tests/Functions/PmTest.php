@@ -12,12 +12,14 @@ use Dpac\Dpac\Functions\Pm;
 class PmTest extends \PHPUnit_Framework_TestCase
 {
     private $raschFixtures;
+    private $fisherFixtures;
 
     public function setUp()
     {
         parent::setUp();
 
         $this->raschFixtures = json_decode(file_get_contents(__DIR__ . '/fixtures/rasch.json'), true);
+        $this->fisherFixtures = json_decode(file_get_contents(__DIR__ . '/fixtures/fisher.json'), true);
     }
 
     /**
@@ -67,5 +69,47 @@ class PmTest extends \PHPUnit_Framework_TestCase
 
             $this->assertEquals($expected, $actual);
         }
+    }
+
+    /**
+     * It should function correctly for unfixed requests
+     * @group pm
+     * @group fisher
+     */
+    public function testFisherWithUnfixedRequests()
+    {
+        foreach ($this->fisherFixtures['unfixed'] as $fixture) {
+            $actual = Pm::fisher($fixture['a'], $fixture['b']);
+            $expected = $fixture['expected'];
+
+            $this->assertEquals($expected, $actual);
+        }
+    }
+
+    /**
+     * It should return a number for fixed requests
+     * @group pm
+     * @group fisher
+     */
+    public function testFisherReturnsNumberWithFixedRequests()
+    {
+        $fixture = $this->fisherFixtures['fixed'];
+        $actual = Pm::fisher($fixture['a'], $fixture['b'], $fixture['digits']);
+
+        $this->assertInternalType('float', $actual);
+    }
+
+    /**
+     * It should function correctly for fixed requests
+     * @group pm
+     * @group fisher
+     */
+    public function testFisherWithFixedRequests()
+    {
+        $fixture = $this->fisherFixtures['fixed'];
+        $actual = Pm::fisher($fixture['a'], $fixture['b'], $fixture['digits']);
+        $expected = $fixture['expected'];
+
+        $this->assertEquals($expected, $actual);
     }
 }
