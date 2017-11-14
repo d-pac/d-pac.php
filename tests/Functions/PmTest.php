@@ -11,9 +11,19 @@ use Dpac\Dpac\Functions\Pm;
  */
 class PmTest extends \PHPUnit_Framework_TestCase
 {
+    private $raschFixtures;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->raschFixtures = json_decode(file_get_contents(__DIR__ . '/fixtures/rasch.json'), true);
+    }
+
     /**
      * It should function correctly
      * @group pm
+     * @group reliability
      */
     public function testReliability()
     {
@@ -22,6 +32,8 @@ class PmTest extends \PHPUnit_Framework_TestCase
 
     /**
      * It should throw a division by zero exception if SD equals 0
+     * @group pm
+     * @group reliability
      */
     public function testReliabilityThrowsDivisionByZeroError()
     {
@@ -32,11 +44,28 @@ class PmTest extends \PHPUnit_Framework_TestCase
 
     /**
      * It should return NaN if RMSE equals 0
+     * @group pm
+     * @group reliability
      */
     public function testReliabilityThrowsNaNError()
     {
         $this->expectException(NotANumberError::class);
 
         Pm::reliability(1, 0);
+    }
+
+    /**
+     * It should function correctly
+     * @group pm
+     * @group rasch
+     */
+    public function testRasch()
+    {
+        foreach ($this->raschFixtures as $fixture) {
+            $actual = Pm::rasch($fixture['a'], $fixture['b']);
+            $expected = $fixture['expected'];
+
+            $this->assertEquals($expected, $actual);
+        }
     }
 }
