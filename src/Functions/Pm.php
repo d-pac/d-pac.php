@@ -1,6 +1,7 @@
 <?php
 namespace Dpac\Dpac\Functions;
 
+use Dpac\Dpac\Exceptions\NotANumberError;
 use Dpac\Dpac\Functions\Stat as Stat;
 
 /**
@@ -16,10 +17,20 @@ class Pm
      *
      * @param float|int $sd Standard deviation
      * @param float|int $rmse RMS of the SE
+     * @throws \DivisionByZeroError
+     * @throws NotANumberError
      * @return float|int
      */
     public static function reliability($sd, $rmse)
     {
+        if ($sd == 0) {
+            throw new \DivisionByZeroError();
+        }
+
+        if ($rmse == 0) {
+            throw new NotANumberError('A value of 0 for RMSE would produce NaN values!');
+        }
+
         $gsq = Stat::square($sd / $rmse);
 
         return ($gsq - 1) / $gsq;
