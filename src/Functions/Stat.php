@@ -17,7 +17,7 @@ class Stat
      */
     public static function square($value)
     {
-        if (!is_float($value) || !is_int($value)) {
+        if (!is_float($value) && !is_int($value)) {
             throw new \InvalidArgumentException('Expected value to be of type float or int');
         }
 
