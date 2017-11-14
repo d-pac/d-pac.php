@@ -1,7 +1,7 @@
 <?php
 namespace Dpac\Dpac;
 
-use Dpac\Dpac\Exception\ComparisonException;
+use Dpac\Dpac\Exceptions\ComparisonException;
 
 /**
  * Class Util

@@ -1,7 +1,7 @@
 <?php
 namespace Dpac\Dpac;
 
-use Dpac\Dpac\Exception\SelectionException as SelectionException;
+use Dpac\Dpac\Exceptions\SelectionException as SelectionException;
 use Dpac\Dpac\Util as Util;
 
 /**

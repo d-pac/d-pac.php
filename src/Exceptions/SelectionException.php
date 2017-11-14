@@ -1,5 +1,5 @@
 <?php
-namespace Dpac\Dpac\Exception;
+namespace Dpac\Dpac\Exceptions;
 
 /**
  * Selection Exception
