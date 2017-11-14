@@ -38,7 +38,7 @@ class Estimation
 
         $lookup['objectsById'][$id] = $valueObject;
 
-        return $lookup['objectsById'][$id];
+        return $valueObject;
     }
 
     /**
@@ -53,14 +53,15 @@ class Estimation
     protected static function prepValuesOnFirstComparison(&$lookup, $id)
     {
         $object = self::getOrCreate($lookup, $id);
-        $object = &$lookup['objectsById'][$object['id']];
-        $object['comparedNum']++;
+        $object = $lookup['objectsById'][$object['id']];
 
-        if ($object['comparedNum'] === 1 && !$object['ranked']) {
-            $object['ability'] = 0;
-            $object['se'] = 0;
+        $lookup['objectsById'][$object['id']]['comparedNum']++;
 
-            $lookup['unrankedById'][$id] = $object;
+        if ($lookup['objectsById'][$object['id']]['comparedNum'] === 1 && !$lookup['objectsById'][$object['id']]['ranked']) {
+            $lookup['objectsById'][$object['id']]['ability'] = 0;
+            $lookup['objectsById'][$object['id']]['se'] = 0;
+
+            $lookup['unrankedById'][$id] = $lookup['objectsById'][$object['id']];
         }
     }
 
@@ -73,11 +74,11 @@ class Estimation
      */
     protected static function CML(&$lookup, $comparisons, $iteration)
     {
-        $previousUnranked = $lookup['unrankedById'];
+        $previousUnranked = &$lookup['unrankedById'];
 
         foreach (array_keys($lookup['unrankedById']) as $id) {
             $current = &$lookup['objectsById'][$id];
-            $prev = $previousUnranked[$id];
+            $prev = &$previousUnranked[$id];
 
             $expected = array_reduce(
                 $comparisons,
