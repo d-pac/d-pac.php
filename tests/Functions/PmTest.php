@@ -3,6 +3,7 @@ namespace Dpac\Dpac;
 
 use Dpac\Dpac\Exceptions\NotANumberError;
 use Dpac\Dpac\Functions\Pm;
+use PHPUnit_FrameWork_Constraint_IsType as PHPUnit_IsType;
 
 /**
  * Pm Test Class
@@ -11,9 +12,12 @@ use Dpac\Dpac\Functions\Pm;
  */
 class PmTest extends \PHPUnit_Framework_TestCase
 {
-    private $raschFixtures;
-    private $fisherFixtures;
+    protected $raschFixtures;
+    protected $fisherFixtures;
 
+    /**
+     * Initialize all our test arrays
+     */
     public function setUp()
     {
         parent::setUp();
@@ -96,7 +100,7 @@ class PmTest extends \PHPUnit_Framework_TestCase
         $fixture = $this->fisherFixtures['fixed'];
         $actual = Pm::fisher($fixture['a'], $fixture['b'], $fixture['digits']);
 
-        $this->assertInternalType('float', $actual);
+        $this->assertInternalType(PHPUnit_IsType::TYPE_FLOAT, $actual);
     }
 
     /**
