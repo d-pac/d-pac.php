@@ -18,6 +18,8 @@ class ComparativeSelectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        parent::setUp();
+
         $this->times = 2000;
 
         // Collection of Item objects with acceptable values

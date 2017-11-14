@@ -28,6 +28,8 @@ class EstimationTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        parent::setUp();
+
         $path = __DIR__ . '/fixtures/';
 
         $this->mixedRankComparisons = $this->getJsonContent($path . 'mixedRankedComparisons.json');
