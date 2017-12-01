@@ -84,11 +84,15 @@ class Estimation
 
             $expected = ['value' => 0, 'info' => 0];
             foreach($comparisons as $comparison) {
-                $filteredId = ($comparison['a'] == $id || $comparison['b'] == $id)? $id : null;
+                $filteredIds = array_filter([$comparison['a'], $comparison['b'], $id], function($value) use ($id) {
+                    return $value != $id;
+                });
 
 
-                if (isset($comparison['selected']) && $filteredId !== null) {
-                    $opponent = $previousUnranked[$filteredId] ?: $lookup['objectsById'][$filteredId];
+                if (isset($comparison['selected']) && count($filteredIds) === 1) {
+                    $filteredId = reset($filteredIds);
+
+                    $opponent = isset($previousUnranked[$filteredId]) ? $previousUnranked[$filteredId] : $lookup['objectsById'][$filteredId];
                     $expected['value'] += Pm::rasch($prev['ability'], $opponent['ability']);
                     $expected['info'] += Pm::fisher($prev['ability'], $opponent['ability']);
                 }
