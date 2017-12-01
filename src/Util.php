@@ -110,4 +110,16 @@ class Util
     {
         return max($minValue, min($maxValue, $number));
     }
+
+    /**
+     * Write to the rasch.log file
+     *
+     * @param string $logString
+     */
+    public static function log($logString)
+    {
+        if (!empty($logString)) {
+            error_log($logString, 3, 'rasch.log');
+        }
+    }
 }
