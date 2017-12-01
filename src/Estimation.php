@@ -53,15 +53,16 @@ class Estimation
     protected static function prepValuesOnFirstComparison(&$lookup, $id)
     {
         $object = self::getOrCreate($lookup, $id);
-        $object = $lookup['objectsById'][$object['id']];
+        // $object = $lookup['objectsById'][$id];
 
-        $lookup['objectsById'][$object['id']]['comparedNum']++;
+        $lookup['objectsById'][$id]['comparedNum']++;
 
-        if ($lookup['objectsById'][$object['id']]['comparedNum'] === 1 && !$lookup['objectsById'][$object['id']]['ranked']) {
-            $lookup['objectsById'][$object['id']]['ability'] = 0;
-            $lookup['objectsById'][$object['id']]['se'] = 0;
+        if ($lookup['objectsById'][$id]['comparedNum'] === 1 && !$lookup['objectsById'][$id]['ranked']) {
+            $lookup['objectsById'][$id]['ability'] = 0;
+            $lookup['objectsById'][$id]['se'] = 0;
 
-            $lookup['unrankedById'][$id] = $lookup['objectsById'][$object['id']];
+            // @sam reference or copy?
+            $lookup['unrankedById'][$id] = $lookup['objectsById'][$id];
         }
     }
 
@@ -74,31 +75,27 @@ class Estimation
      */
     protected static function CML(&$lookup, $comparisons, $iteration)
     {
-        $previousUnranked = &$lookup['unrankedById'];
+        // @sam ref or copy?
+        $previousUnranked = $lookup['unrankedById'];
 
-        foreach (array_keys($lookup['unrankedById']) as $id) {
-            $current = &$lookup['objectsById'][$id];
-            $prev = &$previousUnranked[$id];
+        foreach ($lookup['unrankedById'] as $id => &$current) {
+            // @sam sowieso reference?
+            $prev = $previousUnranked[$id];
 
-            $expected = array_reduce(
-                $comparisons,
-                function ($memo, $comparison) use ($id, $previousUnranked, &$lookup, $prev) {
+            $expected = ['value' => 0, 'info' => 0];
+            foreach($comparisons as $comparison) {
+                $filteredId = ($comparison['a'] == $id || $comparison['b'] == $id)? $id : null;
 
-                    $filteredIds = array_filter([$comparison['a'], $comparison['b']], function ($value) use ($id) {
 
-                        return $value == $id;
-                    });
+                if (isset($comparison['selected']) && $filteredId !== null) {
+                    $opponent = $previousUnranked[$filteredId] ?: $lookup['objectsById'][$filteredId];
+                    $expected['value'] += Pm::rasch($prev['ability'], $opponent['ability']);
+                    $expected['info'] += Pm::fisher($prev['ability'], $opponent['ability']);
+                }
 
-                    if ($comparison['selected'] && count($filteredIds) === 1) {
-                        $opponent = $previousUnranked[reset($filteredIds)] ?: $lookup['objectsById'][reset($filteredIds)];
-                        $memo['value'] += Pm::rasch($prev['ability'], $opponent['ability']);
-                        $memo['info'] += Pm::fisher($prev['ability'], $opponent['ability']);
-                    }
+                // return $expected;
+            }
 
-                    return $memo;
-                },
-                ['value' => 0, 'info' => 0]
-            );
 
             if ($iteration > 0) {
                 $current['ability'] = Util::clamp(
@@ -109,7 +106,6 @@ class Estimation
             } else {
                 $current['se'] = Util::clamp(1 / sqrt($expected['info']), -3000, 200);
             }
-
         }
     }
 
@@ -134,7 +130,7 @@ class Estimation
                 $lookup['itemsById'][$item['id']] = $item;
             }
         } else {
-            $lookup['itemsById'] = $items;
+            $lookup['itemsById'][$items['id']] = $items;
         }
 
         // We need to tally some stuff:
@@ -142,7 +138,7 @@ class Estimation
         // - which items have been compared
         foreach ($comparisons as $comparison) {
             // We only want to take "finished" comparisons into account
-            if ($comparison['selected']) {
+            if (isset($comparison['selected'])) {
                 $valueObject = self::getOrCreate($lookup, $comparison['selected']);
                 $lookup['objectsById'][$valueObject['id']]['selectedNum']++;
                 //$valueObject['selectedNum']++;
@@ -152,14 +148,13 @@ class Estimation
             }
         }
 
-        foreach (array_keys($lookup['unrankedById']) as $id) {
-            // Correction to avoid infinity values later on
-            $object = $lookup['unrankedById'][$id];
+        foreach($lookup['unrankedById'] as $id => $object) {
             $interm = $object['comparedNum'] - (2 * 0.003);
             $interm = ($interm * $object['selectedNum']) / $object['comparedNum'];
 
             $lookup['unrankedById'][$id]['selectedNum'] = 0.003 + $interm;
         }
+
 
         // Loop 4 times (+1) through the estimation
         for ($i = 4; $i >= 0; $i--) {
