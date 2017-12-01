@@ -75,12 +75,12 @@ class Estimation
      */
     protected static function CML(&$lookup, $comparisons, $iteration)
     {
-        // @sam ref or copy?
-        $previousUnranked = $lookup['unrankedById'];
+        // Unserialize and serialize to break all references and obtain a copy
+        $previousUnranked = unserialize(serialize($lookup['unrankedById']));
 
         foreach ($lookup['unrankedById'] as $id => &$current) {
-            // @sam sowieso reference?
-            $prev = $previousUnranked[$id];
+            // Unserialize and serialize to break all references and obtain a copy
+            $prev = unserialize(serialize($previousUnranked[$id]));
 
             $expected = ['value' => 0, 'info' => 0];
             foreach($comparisons as $comparison) {
